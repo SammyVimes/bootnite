@@ -1,0 +1,57 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.8.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+group = 'com.github.sammyvimes'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/snapshot' }
+	maven { url 'https://repo.spring.io/milestone' }
+}
+
+ext {
+	set('springCloudVersion', "Hoxton.BUILD-SNAPSHOT")
+	set('h2.version', '1.4.197')
+}
+
+dependencies {
+//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'
+	implementation 'org.springframework.cloud:spring-cloud-commons'
+	implementation 'org.springframework.cloud:spring-cloud-consul-core'
+	implementation 'org.springframework.cloud:spring-cloud-consul-discovery'
+	implementation ('org.springframework.cloud:spring-cloud-starter-consul-discovery') {
+		exclude group: 'org.springframework.cloud', module: 'spring-cloud-netflix-hystrix'
+	}
+	implementation 'com.ecwid.consul:consul-api'
+	implementation 'org.springframework.session:spring-session-core'
+	implementation 'org.apache.ignite:ignite-spring-data_2.2:2.8.1'
+	compile group: 'org.apache.ignite', name: 'ignite-core', version: '2.8.1'
+	implementation 'org.apache.ignite:ignite-spring-boot-autoconfigure-ext:1.0.0'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+test {
+	useJUnitPlatform()
+}

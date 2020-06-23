@@ -1,0 +1,26 @@
+ignite:
+  igniteInstanceName: properties-instance-name
+  workDirectory: /opt/ignite/
+  communicationSpi:
+    localPort: 5555
+  dataStorageConfiguration:
+    defaultDataRegionConfiguration:
+      initialSize: 10485760 #10MB
+      persistenceEnabled: true
+
+
+spring:
+  application:
+    name: myapp
+    instance_id: 1
+  cloud:
+    consul:
+      enabled: true
+      host: ${HOST_IP}
+    service-registry:
+      enabled: true
+
+ignition:
+  disco:
+    host: ${HOST_IP}
+    port: ${DISCO_PORT}
