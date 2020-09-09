@@ -3,10 +3,6 @@ ignite:
   workDirectory: /opt/ignite/
   communicationSpi:
     localPort: 5555
-  dataStorageConfiguration:
-    defaultDataRegionConfiguration:
-      initialSize: 10485760 #10MB
-      persistenceEnabled: true
 
 
 spring:

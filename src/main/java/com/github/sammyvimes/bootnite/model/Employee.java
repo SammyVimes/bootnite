@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.apache.ignite.cache.query.annotations.QuerySqlField;
 
-public class EmployeeDTO implements Serializable {
+public class Employee implements Serializable {
 
 	@QuerySqlField(index = true)
 	private UUID id;

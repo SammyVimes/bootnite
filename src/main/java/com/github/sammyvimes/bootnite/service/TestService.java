@@ -1,6 +1,6 @@
 package com.github.sammyvimes.bootnite.service;
 
-import com.github.sammyvimes.bootnite.model.EmployeeDTO;
+import com.github.sammyvimes.bootnite.model.Employee;
 import com.github.sammyvimes.bootnite.repo.EmployeeRepository;
 
 import org.springframework.stereotype.Service;
@@ -21,17 +21,17 @@ public class TestService {
 		this.repository = repository;
 	}
 
-	public List<EmployeeDTO> findAll() {
+	public List<Employee> findAll() {
 		return StreamSupport.stream(repository.findAll().spliterator(), false)
 				.collect(Collectors.toList());
 	}
 
-	public EmployeeDTO create(final String name) {
-		final EmployeeDTO employeeDTO = new EmployeeDTO();
+	public Employee create(final String name) {
+		final Employee employee = new Employee();
 		final UUID id = UUID.randomUUID();
-		employeeDTO.setId(id);
-		employeeDTO.setEmployed(true);
-		employeeDTO.setName(name);
-		return repository.save(id, employeeDTO);
+		employee.setId(id);
+		employee.setEmployed(true);
+		employee.setName(name);
+		return repository.save(id, employee);
 	}
 }

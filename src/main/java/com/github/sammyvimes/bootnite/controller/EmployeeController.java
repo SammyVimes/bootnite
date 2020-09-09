@@ -1,6 +1,6 @@
 package com.github.sammyvimes.bootnite.controller;
 
-import com.github.sammyvimes.bootnite.model.EmployeeDTO;
+import com.github.sammyvimes.bootnite.model.Employee;
 import com.github.sammyvimes.bootnite.service.TestService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +18,12 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public ResponseEntity<List<EmployeeDTO>> employees() {
+    public ResponseEntity<List<Employee>> employees() {
         return ResponseEntity.ok(service.findAll());
     }
 
     @PostMapping
-    public ResponseEntity<EmployeeDTO> create(@RequestParam(name = "name") final String name) {
+    public ResponseEntity<Employee> create(@RequestParam(name = "name") final String name) {
         return ResponseEntity.ok(service.create(name));
     }
 

@@ -2,8 +2,9 @@ package com.github.sammyvimes.bootnite.config;
 
 
 import com.github.sammyvimes.bootnite.discovery.TcpDiscoveryConsulIpFinder;
-import com.github.sammyvimes.bootnite.model.EmployeeDTO;
+import com.github.sammyvimes.bootnite.model.Employee;
 import org.apache.ignite.Ignite;
+import org.apache.ignite.cache.CacheMode;
 import org.apache.ignite.configuration.CacheConfiguration;
 import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
 import org.apache.ignite.springdata22.repository.config.EnableIgniteRepositories;
@@ -40,7 +41,9 @@ public class IgniteConfig {
     public IgniteConfigurer configurer(final TcpDiscoveryConsulIpFinder finder) {
         return igniteConfiguration -> {
             CacheConfiguration cache = new CacheConfiguration("employeeCache");
-            cache.setIndexedTypes(UUID.class, EmployeeDTO.class);
+            cache.setIndexedTypes(UUID.class, Employee.class);
+
+            cache.setCacheMode(CacheMode.REPLICATED);
 
             igniteConfiguration.setCacheConfiguration(cache);
             final TcpDiscoverySpi tcpDiscoverySpi = new TcpDiscoverySpi();
